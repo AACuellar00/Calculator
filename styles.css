@@ -1,18 +1,23 @@
-
+*{
+  background-color: rgb(64, 62, 66);
+}
 body{
   display:flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  word-wrap: break-word;
 }
 
 .Memory{
-  background-color: black;
+  background-color: purple;
   width: 205px;
   margin-right: 87px;
   font-size: large;
   font-style: bold;
   color:white;
+  text-align: right;
+  margin-top: 200px;
 }
 
 .Body{
@@ -24,7 +29,7 @@ button{
   background-color: rgb(214, 212, 212);
   height: 50px;
   width: 50px;
-  font-size: large;
+  font-size: 16px;
   font-style: bold;
 }
 
