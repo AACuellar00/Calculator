@@ -154,13 +154,7 @@ function operate(){
 
 //STILL WIP
 function backspace(){
-    let lastChar = memory.textContent.charAt(memory.textContent.length-1);
-    let secondLastChar = memory.textContent.charAt(memory.textContent.length-2);
-    
-
-    memory.textContent =memory.textContent.substring(0,memory.textContent.length-1);
-
-    if(memory.textContent.length==0){
+    if(memory.textContent.length==1){
         memory.textContent="0";
         decPress=false;
         lastPressWasANumber=false;
@@ -168,17 +162,24 @@ function backspace(){
         operPressed=false;
         lastOpp="";
     }
+    else{
+        let lastChar = memory.textContent.charAt(memory.textContent.length-1);
+        let secondLastChar = memory.textContent.charAt(memory.textContent.length-2);
+        
+    
+        memory.textContent =memory.textContent.substring(0,memory.textContent.length-1);
+    }
 }
 
 function CE(){
     memory.textContent = "0";
     decPress=false;
-    lastPressWasANumber=false;
-    prevNum="0";
-    firstNumberTyped=false;
+    lastPressWasANumber=true;
     operPressed=false;
-    lastOpp="";
     secndNumberStarted=false;
+    prevNum="0";
+    currentNum="0";
+    lastOpp="";
 }
 
 

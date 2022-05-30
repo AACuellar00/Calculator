@@ -1,23 +1,35 @@
-*{
-  background-color: rgb(64, 62, 66);
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
+
 body{
   display:flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
   word-wrap: break-word;
+  background-color: whitesmoke;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.Calc{
+  width: 250px;
+  border: 2px rgb(53, 53, 53) solid;
+  padding: 20px;
+  background-color: rgb(170, 170, 170);
 }
 
 .Memory{
   background-color: purple;
-  width: 205px;
-  margin-right: 87px;
+  width: 212px;
+  margin-bottom: 5px;
   font-size: large;
   font-style: bold;
   color:white;
   text-align: right;
-  margin-top: 200px;
+  border: solid black 3px;
 }
 
 .Body{
