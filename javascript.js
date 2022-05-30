@@ -2,9 +2,9 @@ const memory = document.querySelector('#Memory');
 const containerB = document.querySelector('#Body');
 
 let decPress=false;
-let lastPressNum=false;
-let pressedNum=false;
+let lastPressWasANumber=true;
 let operPressed=false;
+let secndNumberStarted=false;
 let prevNum="0";
 let currentNum="0";
 let lastOpp="";
@@ -15,6 +15,8 @@ const dels = document.getElementsByClassName("del");
 const finish = document.getElementById("equals");
 
 function operAdd(){
+    console.log(parseInt(prevNum));
+    console.log(parseInt(currentNum));
     let result =parseInt(prevNum) + parseInt(currentNum);
     let dec=0;
 
@@ -28,6 +30,8 @@ function operAdd(){
     prevNum="0";
     currentNum=result;
     lastOpp="";
+    operPressed=false;
+    lastPressWasANumber=true;
 }
 
 function operSub(){
@@ -44,6 +48,8 @@ function operSub(){
     prevNum="0";
     currentNum=result;
     lastOpp="";
+    operPressed=false;
+    lastPressWasANumber=true;
 }
 
 function operMulti(){
@@ -60,6 +66,8 @@ function operMulti(){
     prevNum="0";
     currentNum=result;
     lastOpp="";
+    operPressed=false;
+    lastPressWasANumber=true;
 }
 
 function operDiv(){
@@ -80,6 +88,8 @@ function operDiv(){
         prevNum="0";
         currentNum=result;
         lastOpp="";
+        operPressed=false;
+        lastPressWasANumber=true;
     }
 }
 
@@ -97,10 +107,12 @@ function operModu(){
     prevNum="0";
     currentNum=result;
     lastOpp="";
+    operPressed=false;
+    lastPressWasANumber=true;
 }
 
 function operExpo(){
-    let result =parseInt(prevNum) ^ parseInt(currentNum);
+    let result=Math.pow(parseInt(prevNum),parseInt(currentNum));
     let dec=0;
 
     if (Math.floor(result) !== result) {
@@ -113,6 +125,8 @@ function operExpo(){
     prevNum="0";
     currentNum=result;
     lastOpp="";
+    operPressed=false;
+    lastPressWasANumber=true;
 }
 
 function operate(){
@@ -138,6 +152,7 @@ function operate(){
     }
 }
 
+//STILL WIP
 function backspace(){
     let lastChar = memory.textContent.charAt(memory.textContent.length-1);
     let secondLastChar = memory.textContent.charAt(memory.textContent.length-2);
@@ -148,9 +163,8 @@ function backspace(){
     if(memory.textContent.length==0){
         memory.textContent="0";
         decPress=false;
-        lastPressNum=false;
-        prevNum=0;
-        pressedNum=false;
+        lastPressWasANumber=false;
+        prevNum="0";
         operPressed=false;
         lastOpp="";
     }
@@ -159,11 +173,12 @@ function backspace(){
 function CE(){
     memory.textContent = "0";
     decPress=false;
-    lastPressNum=false;
-    prevNum=0;
-    pressedNum=false;
+    lastPressWasANumber=false;
+    prevNum="0";
+    firstNumberTyped=false;
     operPressed=false;
     lastOpp="";
+    secndNumberStarted=false;
 }
 
 
@@ -171,29 +186,27 @@ for (const num of numbers){
     num.addEventListener('click',() =>{
         if(memory.textContent=="0"){
             memory.textContent=num.id;
-            pressedNum=true;
-            lastPressNum=true;
+            lastPressWasANumber=true;
         }
         else{
             memory.textContent+=num.id;
-            lastPressNum=true;
-            pressedNum=true;
-            operPressed=false;
-            currentNum=memory.textContent;
+            lastPressWasANumber=true;
+            currentNum+=num.id;
+            if(operPressed==true)
+                secndNumberStarted=true;
         }
     });
 }
 
 for (const oper of operators){
     oper.addEventListener('click', () =>{
-        if(pressedNum==true){
+        if(operPressed==false){
             prevNum=parseInt(memory.textContent);
             memory.textContent+=oper.id;
             currentNum="";
             lastOpp=oper.id;
-            pressedNum==false;
             operPressed=true;
-            lastPressNum=false;
+            lastPressWasANumber=false;
             decPress=false;
         }
         else{
@@ -214,11 +227,11 @@ for (const del of dels){
 }
 
 equals.addEventListener('click', () =>{
-    if(lastPressNum==true && operPressed==true){
+    if(lastPressWasANumber==true && operPressed==true && secndNumberStarted==true){
         operate();
     }
     else{
-
+        console.log("Oops");
     }
 });
 
