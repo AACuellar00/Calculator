@@ -1,0 +1,39 @@
+*{
+  background-color: grey;
+}
+
+body{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#Body{
+  height: 960px;
+  width: 960px;
+  margin-top: 50px;
+  display: inline-grid;
+  border: 5px solid yellow;
+  border-radius:5px;
+}
+
+.Title{
+  display: flex;
+  font-size: 40px;
+  color:black;
+  font-style: bold;
+}
+
+.Head{
+  font-size: 40px;
+  color:black;
+  font-style: bold;
+}
+
+button{
+  height: 40px;
+  width: 100px;
+}
+
+
