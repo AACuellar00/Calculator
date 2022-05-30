@@ -13,18 +13,17 @@ const numbers = document.getElementsByClassName("num");
 const operators = document.getElementsByClassName("operator");
 const dels = document.getElementsByClassName("del");
 const finish = document.getElementById("equals");
+const decimal = document.getElementById(".");
 
 function operAdd(){
-    console.log(parseInt(prevNum));
-    console.log(parseInt(currentNum));
-    let result =parseInt(prevNum) + parseInt(currentNum);
+    let result =parseFloat(prevNum) + parseFloat(currentNum);
     let dec=0;
 
     if (Math.floor(result) !== result) {
         dec=result.toString().split(".")[1].length || 0;
+        if(dec>=10)
+            result=result.toFixed(10);
     }
-    if(dec>=10)
-        result=result.toFixed(10);
 
     memory.textContent=result;
     prevNum="0";
@@ -35,14 +34,14 @@ function operAdd(){
 }
 
 function operSub(){
-    let result =parseInt(prevNum) - parseInt(currentNum);
+    let result =parseFloat(prevNum) - parseFloat(currentNum);
     let dec=0;
 
     if (Math.floor(result) !== result) {
         dec=result.toString().split(".")[1].length || 0;
+        if(dec>=10)
+            result=result.toFixed(10);
     }
-    if(dec>=10)
-        result=result.toFixed(10);
 
     memory.textContent=result;
     prevNum="0";
@@ -53,14 +52,14 @@ function operSub(){
 }
 
 function operMulti(){
-    let result =parseInt(prevNum) * parseInt(currentNum);
+    let result =parseFloat(prevNum) * parseFloat(currentNum);
     let dec=0;
 
     if (Math.floor(result) !== result) {
         dec=result.toString().split(".")[1].length || 0;
+        if(dec>=10)
+            result=result.toFixed(10);
     }
-    if(dec>=10)
-        result=result.toFixed(10);
 
     memory.textContent=result;
     prevNum="0";
@@ -71,18 +70,18 @@ function operMulti(){
 }
 
 function operDiv(){
-    if(parseInt(currentNum)==0){
+    if(parseFloat(currentNum)==0){
         alert("Please do not divide by 0");
     }
     else{
-        let result =parseInt(prevNum) / parseInt(currentNum);
+        let result =parseFloat(prevNum) / parseFloat(currentNum);
         let dec=0;
     
         if (Math.floor(result) !== result) {
             dec=result.toString().split(".")[1].length || 0;
+            if(dec>=10)
+                result=result.toFixed(10);
         }
-        if(dec>=10)
-            result=result.toFixed(10);
     
         memory.textContent=result;
         prevNum="0";
@@ -94,14 +93,14 @@ function operDiv(){
 }
 
 function operModu(){
-    let result =parseInt(prevNum) % parseInt(currentNum);
+    let result =parseFloat(prevNum) % parseFloat(currentNum);
     let dec=0;
 
     if (Math.floor(result) !== result) {
         dec=result.toString().split(".")[1].length || 0;
+        if(dec>=10)
+            result=result.toFixed(10);
     }
-    if(dec>=10)
-        result=result.toFixed(10);
 
     memory.textContent=result;
     prevNum="0";
@@ -112,15 +111,14 @@ function operModu(){
 }
 
 function operExpo(){
-    let result=Math.pow(parseInt(prevNum),parseInt(currentNum));
+    let result=Math.pow(parseFloat(prevNum),parseFloat(currentNum));
     let dec=0;
 
     if (Math.floor(result) !== result) {
         dec=result.toString().split(".")[1].length || 0;
+        if(dec>=10)
+            result=result.toFixed(10);
     }
-    if(dec>=10)
-        result=result.toFixed(10);
-
     memory.textContent=result;
     prevNum="0";
     currentNum=result;
@@ -157,17 +155,37 @@ function backspace(){
     if(memory.textContent.length==1){
         memory.textContent="0";
         decPress=false;
-        lastPressWasANumber=false;
+        lastPressWasANumber=true;
         prevNum="0";
+        currentNum="0"
         operPressed=false;
         lastOpp="";
+    }
+    else if(memory.textContent.length==2){
+        memory.textContent=memory.textContent.charAt(0);
+        lastPressWasANumber=true;
+        lastOpp="";
+        operPressed=false;
+        decPress=false;
     }
     else{
         let lastChar = memory.textContent.charAt(memory.textContent.length-1);
         let secondLastChar = memory.textContent.charAt(memory.textContent.length-2);
-        
-    
-        memory.textContent =memory.textContent.substring(0,memory.textContent.length-1);
+        if(lastChar=="+" || lastChar=="-" || lastChar=="*" || lastChar=="/"
+                || lastChar=="^"|| lastChar=="%"){
+            memory.textContent =memory.textContent.substring(0,memory.textContent.length-1);
+            lastPressWasANumber=true;
+            lastOpp="";
+            operPressed=false;
+        }
+        else if(lastChar=="."){
+            memory.textContent =memory.textContent.substring(0,memory.textContent.length-1);
+            decPress=false;
+            lastPressWasANumber=true;
+        }
+        else{
+            memory.textContent =memory.textContent.substring(0,memory.textContent.length-1);
+        }
     }
 }
 
@@ -202,7 +220,7 @@ for (const num of numbers){
 for (const oper of operators){
     oper.addEventListener('click', () =>{
         if(operPressed==false){
-            prevNum=parseInt(memory.textContent);
+            prevNum=parseFloat(memory.textContent);
             memory.textContent+=oper.id;
             currentNum="";
             lastOpp=oper.id;
@@ -226,6 +244,19 @@ for (const del of dels){
         }
     });
 }
+
+decimal.addEventListener('click', () =>{
+    if(lastPressWasANumber==true && decPress==false){
+        memory.textContent+=".";
+        lastPressWasANumber=true;
+        currentNum+=".";
+        decPress=true;
+    }
+    
+    else{
+        console.log("Oops");
+    }
+});
 
 equals.addEventListener('click', () =>{
     if(lastPressWasANumber==true && operPressed==true && secndNumberStarted==true){

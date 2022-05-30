@@ -13,6 +13,10 @@ body{
   font-family: 'Roboto', sans-serif;
 }
 
+.header{
+  height: 750px;
+}
+
 
 .Calc{
   width: 250px;
