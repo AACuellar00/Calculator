@@ -150,7 +150,6 @@ function operate(){
     }
 }
 
-//STILL WIP
 function backspace(){
     if(memory.textContent.length==1){
         memory.textContent="0";
