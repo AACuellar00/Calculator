@@ -1,6 +1,3 @@
-*{
-  background-color: grey;
-}
 
 body{
   display:flex;
@@ -9,31 +6,26 @@ body{
   flex-direction: column;
 }
 
-#Body{
-  height: 960px;
-  width: 960px;
-  margin-top: 50px;
-  display: inline-grid;
-  border: 5px solid yellow;
-  border-radius:5px;
+.Memory{
+  background-color: black;
+  width: 205px;
+  margin-right: 87px;
+  font-size: large;
+  font-style: bold;
+  color:white;
 }
 
-.Title{
-  display: flex;
-  font-size: 40px;
-  color:black;
-  font-style: bold;
-}
-
-.Head{
-  font-size: 40px;
-  color:black;
-  font-style: bold;
+.Body{
+  height: 60px;
+  width: 300px;
 }
 
 button{
-  height: 40px;
-  width: 100px;
+  background-color: rgb(214, 212, 212);
+  height: 50px;
+  width: 50px;
+  font-size: large;
+  font-style: bold;
 }
 
 
