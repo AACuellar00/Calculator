@@ -3,20 +3,104 @@ const containerB = document.querySelector('#Body');
 
 let decPress=false;
 let lastPressNum=false;
+let pressedNum=false;
+let operPressed=false;
+let prevNum=0;
+let currentNum=0;
 
-const buttons = document.querySelectorAll('button');
 const numbers = document.getElementsByClassName("num");
+const operators = document.getElementsByClassName("operator");
+const dels = document.getElementsByClassName("del");
+
+function operAdd(){
+
+}
+function operSub(){
+
+}
+function operMulti(){
+
+}
+function operDiv(){
+
+}
+function operModu(){
+
+}
+function operExpo(){
+
+}
+function operate(){
+
+}
+
+function backspace(){
+//modify all bools and such based on last character
+    memory.textContent =memory.textContent.substring(0,memory.textContent.length-1);
+    if(memory.textContent.length==0){
+        memory.textContent="0";
+        decPress=false;
+        lastPressNum=false;
+        prevNum=0;
+        pressedNum=false;
+        operPressed=false;
+}
+}
+
+function CE(){
+    memory.textContent = "0";
+    decPress=false;
+    lastPressNum=false;
+    prevNum=0;
+    pressedNum=false;
+    operPressed=false;
+}
+
 
 for (const num of numbers){
     num.addEventListener('click',() =>{
-        if(memory.textContent=="0")
+        if(memory.textContent=="0"){
                 memory.textContent=num.id;
+        }
         else{
             memory.textContent+=num.id;
             lastPressNum=true;
+            pressedNum=true;
+            
+            operPressed=false;
         }
     });
 }
+
+for (const oper of operators){
+    oper.addEventListener('click', () =>{
+        if(pressedNum==true){
+            prevNum=parseInt(memory.textContent);
+            memory.textContent+=oper.id;
+            pressedNum==false;
+            operPressed=true;
+            lastPressNum=false;
+            decPress=false;
+        }
+        else{
+        }
+    });
+}
+
+for (const del of dels){
+    del.addEventListener('click', () =>{
+        if(del.id=="CE"){
+            
+        }
+        else{
+            
+        }
+    });
+}
+
+
+
+
 
 
 

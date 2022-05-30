@@ -33,4 +33,12 @@ button{
   font-style: bold;
 }
 
+.num{
+  background-color: rgb(255, 190, 130);
+}
+
+.operator{
+  background-color: rgb(255, 112, 112);
+}
+
 
